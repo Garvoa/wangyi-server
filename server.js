@@ -5,19 +5,20 @@ const Jwt = require('jsonwebtoken')
 const bodyParser = require('koa-bodyparser');
 const app = new Koa();
 const router = new KoaRouter();
-require('./routers/home')(router)
-require('./routers/indexCateModule')(router)
-require('./routers/categoryLeft')(router)
-require('./routers/categoRight')(router)
-require('./routers/login')(router, Jwt)
-require('./routers/register')(router)
+
 
 app.use(bodyParser());
 app.use(require('./middleware/token-verify'))
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-
+require('./routers/home')(router)
+require('./routers/indexCateModule')(router)
+require('./routers/categoryLeft')(router)
+require('./routers/categoryRight')(router)
+require('./routers/login')(router, Jwt)
+require('./routers/register')(router)
+require('./routers/worthBuying')(router)
 
 app.listen('3001', (err) => {
   if (!err) {
